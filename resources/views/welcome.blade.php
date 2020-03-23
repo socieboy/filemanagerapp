@@ -6,5 +6,6 @@
         <title>Laravel</title>
     </head>
     <body>
+    <a href="/filemanager">File Manager</a>
     </body>
 </html>

@@ -11,10 +11,11 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js');
+mix.js('resources/js/app.js', 'vendor/filemanager/js/filemanager.js');
 
-mix.postCss('resources/css/filemanager.css', 'packages/Socieboy/FileManager/resources/css', [
+mix.postCss('resources/css/app.css', 'vendor/filemanager/css/filemanager.css', [
     require('tailwindcss'),
 ])
 
-mix.copy('public/js/app.js', 'packages/Socieboy/FileManager/resources/assets/js/filemanager.js')
+mix.copy('public/vendor/filemanager/js/filemanager.js', 'packages/Socieboy/FileManager/resources/assets/js')
+mix.copy('public/vendor/filemanager/css/filemanager.css', 'packages/Socieboy/FileManager/resources/assets/css')

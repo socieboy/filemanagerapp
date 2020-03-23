@@ -1,5 +1,6 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/packages/Socieboy/FileManager/resources/css/filemanager.css": "/packages/Socieboy/FileManager/resources/css/filemanager.css",
-    "/packages/Socieboy/FileManager/resources/assets/js/filemanager.js": "/packages/Socieboy/FileManager/resources/assets/js/filemanager.js"
+    "/vendor/filemanager/js/filemanager.js": "/vendor/filemanager/js/filemanager.js",
+    "/vendor/filemanager/css/filemanager.css": "/vendor/filemanager/css/filemanager.css",
+    "/packages/Socieboy/FileManager/resources/assets/js/filemanager.js": "/packages/Socieboy/FileManager/resources/assets/js/filemanager.js",
+    "/packages/Socieboy/FileManager/resources/assets/css/filemanager.css": "/packages/Socieboy/FileManager/resources/assets/css/filemanager.css"
 }

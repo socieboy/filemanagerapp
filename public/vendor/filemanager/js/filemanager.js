@@ -14384,14 +14384,14 @@ module.exports = g;
 
 /***/ }),
 
-/***/ "./resources/css/filemanager.css":
-/*!***************************************!*\
-  !*** ./resources/css/filemanager.css ***!
-  \***************************************/
+/***/ "./resources/css/app.css":
+/*!*******************************!*\
+  !*** ./resources/css/app.css ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\nModuleBuildError: Module build failed (from ./node_modules/postcss-loader/src/index.js):\nError: ENOENT: no such file or directory, open '/Users/socieboy/Sites/socieboy/resources/css/filemanager.css'\n    at /Users/socieboy/Sites/socieboy/node_modules/webpack/lib/NormalModule.js:316:20\n    at /Users/socieboy/Sites/socieboy/node_modules/loader-runner/lib/LoaderRunner.js:367:11\n    at /Users/socieboy/Sites/socieboy/node_modules/loader-runner/lib/LoaderRunner.js:203:19\n    at /Users/socieboy/Sites/socieboy/node_modules/enhanced-resolve/lib/CachedInputFileSystem.js:85:15\n    at processTicksAndRejections (internal/process/task_queues.js:79:11)");
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 
@@ -14486,14 +14486,14 @@ module.exports = {
 /***/ }),
 
 /***/ 0:
-/*!*******************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/css/filemanager.css ***!
-  \*******************************************************************/
+/*!***********************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/css/app.css ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! /Users/socieboy/Sites/socieboy/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/socieboy/Sites/socieboy/resources/css/filemanager.css */"./resources/css/filemanager.css");
+module.exports = __webpack_require__(/*! /Users/socieboy/Sites/socieboy/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })
