@@ -2154,7 +2154,7 @@
             "version": "dev-master",
             "dist": {
                 "type": "path",
-                "url": "/Users/socieboy/Sites/socieboy/packages/Socieboy/FileManager",
+                "url": "/packages/Socieboy/FileManager",
                 "reference": "9ae4c485a39a122be76623328a4c36cadf163585"
             },
             "require": {
