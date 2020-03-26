@@ -15,6 +15,7 @@ mix.js('packages/Socieboy/FileManager/resources/js/app.js', 'vendor/filemanager/
 
 mix.postCss('packages/Socieboy/FileManager/resources/css/app.css', 'vendor/filemanager/filemanager.css', [
     require('tailwindcss'),
-])
+]);
 
-mix.copyDirectory('public/vendor/filemanager/', 'packages/Socieboy/FileManager/public')
+mix.copyDirectory('public/vendor/filemanager/', 'packages/Socieboy/FileManager/public');
+mix.copy('public/mix-manifest.json', 'packages/Socieboy/FileManager/public');
