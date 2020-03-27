@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -35464,17 +35464,6 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./packages/Socieboy/FileManager/resources/css/app.css":
-/*!*************************************************************!*\
-  !*** ./packages/Socieboy/FileManager/resources/css/app.css ***!
-  \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
 /***/ "./packages/Socieboy/FileManager/resources/js/app.js":
 /*!***********************************************************!*\
   !*** ./packages/Socieboy/FileManager/resources/js/app.js ***!
@@ -35752,15 +35741,28 @@ module.exports = {
 
 /***/ }),
 
-/***/ 0:
-/*!***********************************************************************************************************************!*\
-  !*** multi ./packages/Socieboy/FileManager/resources/js/app.js ./packages/Socieboy/FileManager/resources/css/app.css ***!
-  \***********************************************************************************************************************/
+/***/ "./resources/js/app.js":
+/*!*****************************!*\
+  !*** ./resources/js/app.js ***!
+  \*****************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _packages_Socieboy_FileManager_resources_js_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../packages/Socieboy/FileManager/resources/js/app */ "./packages/Socieboy/FileManager/resources/js/app.js");
+
+
+/***/ }),
+
+/***/ 1:
+/*!***********************************!*\
+  !*** multi ./resources/js/app.js ***!
+  \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/gmlo/Sites/filemanagerapp/packages/Socieboy/FileManager/resources/js/app.js */"./packages/Socieboy/FileManager/resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/gmlo/Sites/filemanagerapp/packages/Socieboy/FileManager/resources/css/app.css */"./packages/Socieboy/FileManager/resources/css/app.css");
+module.exports = __webpack_require__(/*! /Users/gmlo/Sites/filemanagerapp/resources/js/app.js */"./resources/js/app.js");
 
 
 /***/ })
