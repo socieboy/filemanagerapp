@@ -35464,10 +35464,10 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./packages/Socieboy/FileManager/resources/css/app.css":
-/*!*************************************************************!*\
-  !*** ./packages/Socieboy/FileManager/resources/css/app.css ***!
-  \*************************************************************/
+/***/ "./resources/css/app.css":
+/*!*******************************!*\
+  !*** ./resources/css/app.css ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -35475,10 +35475,10 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./packages/Socieboy/FileManager/resources/js/app.js":
-/*!***********************************************************!*\
-  !*** ./packages/Socieboy/FileManager/resources/js/app.js ***!
-  \***********************************************************/
+/***/ "./resources/js/app.js":
+/*!*****************************!*\
+  !*** ./resources/js/app.js ***!
+  \*****************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -35500,10 +35500,10 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$http.defaults.headers.comm
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$prettyBytes = __webpack_require__(/*! pretty-bytes */ "./node_modules/pretty-bytes/index.js"); // Components
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('fm-dropdown', __webpack_require__(/*! ./components/Dropdown */ "./packages/Socieboy/FileManager/resources/js/components/Dropdown.js"));
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('fm-dropzone', __webpack_require__(/*! ./components/Dropzone */ "./packages/Socieboy/FileManager/resources/js/components/Dropzone.js"));
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('fm-preview', __webpack_require__(/*! ./components/Preview */ "./packages/Socieboy/FileManager/resources/js/components/Preview.js"));
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('fm-files', __webpack_require__(/*! ./components/Files */ "./packages/Socieboy/FileManager/resources/js/components/Files.js"));
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('fm-dropdown', __webpack_require__(/*! ./components/Dropdown */ "./resources/js/components/Dropdown.js"));
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('fm-dropzone', __webpack_require__(/*! ./components/Dropzone */ "./resources/js/components/Dropzone.js"));
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('fm-preview', __webpack_require__(/*! ./components/Preview */ "./resources/js/components/Preview.js"));
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('fm-files', __webpack_require__(/*! ./components/Files */ "./resources/js/components/Files.js"));
 window.bus = new vue__WEBPACK_IMPORTED_MODULE_0___default.a();
 window.app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#filemanager',
@@ -35514,30 +35514,22 @@ window.app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     };
   },
   created: function created() {
-    var _this = this;
-
     this.openDirectory('/'); // fmBroadcast.$on('dropzone-success', this.displayDropzone = false);
     // fmBroadcast.$on('dropzone-success', () => {
     //     location.reload()
     // });
-
-    bus.$on('dropzone-success', function () {
-      _this.displayDropzone = false;
-
-      _this.openDirectory(_this.viewDirectory.path);
-    });
   },
   methods: {
     openDirectory: function openDirectory(path) {
-      var _this2 = this;
+      var _this = this;
 
       this.$http.get("/filemanager/directory?path=".concat(path)).then(function (response) {
-        _this2.viewDirectory = response.data.directory;
-        bus.$emit('directory', _this2.viewDirectory);
+        _this.viewDirectory = response.data.directory;
+        bus.$emit('directory', _this.viewDirectory);
       });
     },
     createDirectory: function createDirectory() {
-      var _this3 = this;
+      var _this2 = this;
 
       var name = prompt('Directory Name:');
 
@@ -35546,7 +35538,7 @@ window.app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
           path: this.viewDirectory.path,
           name: name
         }).then(function (response) {
-          _this3.viewDirectory.subdirectories.push(response.data.directory);
+          _this2.viewDirectory.subdirectories.push(response.data.directory);
         })["catch"](function (error) {
           alert(error.response.data.message);
         });
@@ -35557,10 +35549,10 @@ window.app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
 
 /***/ }),
 
-/***/ "./packages/Socieboy/FileManager/resources/js/components/Dropdown.js":
-/*!***************************************************************************!*\
-  !*** ./packages/Socieboy/FileManager/resources/js/components/Dropdown.js ***!
-  \***************************************************************************/
+/***/ "./resources/js/components/Dropdown.js":
+/*!*********************************************!*\
+  !*** ./resources/js/components/Dropdown.js ***!
+  \*********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -35623,10 +35615,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./packages/Socieboy/FileManager/resources/js/components/Dropzone.js":
-/*!***************************************************************************!*\
-  !*** ./packages/Socieboy/FileManager/resources/js/components/Dropzone.js ***!
-  \***************************************************************************/
+/***/ "./resources/js/components/Dropzone.js":
+/*!*********************************************!*\
+  !*** ./resources/js/components/Dropzone.js ***!
+  \*********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -35669,10 +35661,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./packages/Socieboy/FileManager/resources/js/components/Files.js":
-/*!************************************************************************!*\
-  !*** ./packages/Socieboy/FileManager/resources/js/components/Files.js ***!
-  \************************************************************************/
+/***/ "./resources/js/components/Files.js":
+/*!******************************************!*\
+  !*** ./resources/js/components/Files.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -35687,10 +35679,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./packages/Socieboy/FileManager/resources/js/components/Preview.js":
-/*!**************************************************************************!*\
-  !*** ./packages/Socieboy/FileManager/resources/js/components/Preview.js ***!
-  \**************************************************************************/
+/***/ "./resources/js/components/Preview.js":
+/*!********************************************!*\
+  !*** ./resources/js/components/Preview.js ***!
+  \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -35753,14 +35745,14 @@ module.exports = {
 /***/ }),
 
 /***/ 0:
-/*!***********************************************************************************************************************!*\
-  !*** multi ./packages/Socieboy/FileManager/resources/js/app.js ./packages/Socieboy/FileManager/resources/css/app.css ***!
-  \***********************************************************************************************************************/
+/*!***********************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/css/app.css ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/gmlo/Sites/filemanagerapp/packages/Socieboy/FileManager/resources/js/app.js */"./packages/Socieboy/FileManager/resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/gmlo/Sites/filemanagerapp/packages/Socieboy/FileManager/resources/css/app.css */"./packages/Socieboy/FileManager/resources/css/app.css");
+__webpack_require__(/*! /Users/socieboy/Sites/socieboy/packages/Socieboy/FileManager/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/socieboy/Sites/socieboy/packages/Socieboy/FileManager/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })

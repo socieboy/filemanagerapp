@@ -1,0 +1,1 @@
+import './../../packages/Socieboy/FileManager/resources/js/app';
