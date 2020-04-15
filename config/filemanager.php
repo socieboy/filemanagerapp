@@ -2,7 +2,7 @@
 
 return [
 
-    'disk' => 'public',
+    'disk' => 's3',
 
     'path' => 'filemanager',
 
@@ -15,4 +15,6 @@ return [
     'ignore_extensions' => ['gitignore'],
 
     'temporary_url_expired_time' => 5,
+
+    'visibility' => 'public',
 ];

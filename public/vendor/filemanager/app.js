@@ -212,38 +212,33 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
-    updateVisibility: function updateVisibility() {
-      bus.$emit('change-visibility', this.directory.path);
-    },
-    renameFolder: function renameFolder() {
-      var _this2 = this;
-
-      var name = prompt('New name:');
-
-      if (name) {
-        this.$http.patch("/filemanager/directory", {
-          path: this.directory.path,
-          name: name
-        }).then(function (response) {
-          _this2.folder.name = name;
-          _this2.isOpen = false;
-        })["catch"](function (error) {
-          alert(error.response.data.message);
-        });
-      }
-    },
+    // updateVisibility(){
+    //
+    // },
+    //
+    // renameFolder(){
+    //     var name = prompt('New name:');
+    //     if(name) {
+    //         this.$http.patch(`/filemanager/directory`, {path: this.directory.path, name: name}).then(response => {
+    //             this.folder.name = name;
+    //             this.isOpen = false;
+    //         }).catch(error => {
+    //             alert(error.response.data.message)
+    //         })
+    //     }
+    // },
     removeFolder: function removeFolder() {
-      var _this3 = this;
+      var _this2 = this;
 
       var response = confirm('Confirm this action:');
 
       if (response) {
         this.$http["delete"]("/filemanager/directory", {
           data: {
-            path: this.directory.path
+            path: this.folder.path
           }
         }).then(function (data) {
-          bus.$emit('open-directory', _this3.directory.path);
+          bus.$emit('open-directory', _this2.folder.parentPath);
         })["catch"](function (error) {
           console.log(error.response.data.message);
         });
@@ -346,8 +341,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -575,77 +568,6 @@ var _icons_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*/__webpack_
   computed: {
     path: function path() {
       return _icons_json__WEBPACK_IMPORTED_MODULE_0__[this.name];
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./packages/Socieboy/FileManager/resources/js/components/Visibility.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/Socieboy/FileManager/resources/js/components/Visibility.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      path: '',
-      visibility: null
-    };
-  },
-  created: function created() {
-    var _this = this;
-
-    bus.$on('change-visibility', function (path) {
-      _this.$http.get("/filemanager/visibility?path=".concat(path)).then(function (response) {
-        _this.visibility = response.data.visibility;
-      });
-
-      _this.path = path;
-    });
-  },
-  methods: {
-    save: function save() {
-      this.$http.patch("/filemanager/visibility", {
-        path: this.path,
-        visibility: this.visibility
-      }).then(function (response) {})["catch"](function (data) {
-        console.log(data); // alert(response.data.errors.error[0])
-      });
     }
   }
 });
@@ -1915,38 +1837,6 @@ var render = function() {
                 attrs: { href: "#" },
                 on: {
                   click: function($event) {
-                    return _vm.renameFolder()
-                  }
-                }
-              },
-              [_vm._v("Rename")]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass:
-                  "block px-4 py-2 text-gray-800 hover:bg-gray-700 hover:text-white",
-                attrs: { href: "#visibility" },
-                on: {
-                  click: function($event) {
-                    return _vm.updateVisibility()
-                  }
-                }
-              },
-              [_vm._v("Visibility")]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "border border-gray-200 my-1 mx-2" }),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass:
-                  "block px-4 py-2 text-gray-800 hover:bg-gray-700 hover:text-white",
-                attrs: { href: "#" },
-                on: {
-                  click: function($event) {
                     return _vm.removeFolder()
                   }
                 }
@@ -2092,8 +1982,6 @@ var render = function() {
       "div",
       { staticClass: "flex flex-col" },
       [
-        _c("fm-visibility"),
-        _vm._v(" "),
         _vm.directory.parentPath
           ? _c(
               "a",
@@ -2186,7 +2074,7 @@ var render = function() {
         "div",
         {
           staticClass:
-            "modal fixed inset-0 m-auto flex flex-col  w-full md:w-1/3 bg-white rounded-lg shadow-2xl z-10 border border-gray-300",
+            "modal fixed inset-0 m-auto flex flex-col  w-full md:w-1/2 bg-white rounded-lg shadow-2xl z-10 border border-gray-300",
           staticStyle: { height: "fit-content" }
         },
         [
@@ -2218,7 +2106,10 @@ var render = function() {
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "py-2 px-4 border-b border-gray-300 text-gray-700" },
+            {
+              staticClass:
+                "py-2 px-4 border-b border-gray-300 h-20 text-gray-700"
+            },
             [_vm._t("default")],
             2
           ),
@@ -2467,134 +2358,6 @@ var render = function() {
       attrs: { viewBox: "0 0 20 20" }
     },
     [_c("path", { attrs: { fill: "none", d: _vm.path } })]
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./packages/Socieboy/FileManager/resources/js/components/Visibility.vue?vue&type=template&id=0f51691f&":
-/*!*******************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./packages/Socieboy/FileManager/resources/js/components/Visibility.vue?vue&type=template&id=0f51691f& ***!
-  \*******************************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "fm-modal",
-    {
-      attrs: { name: "visibility" },
-      scopedSlots: _vm._u([
-        {
-          key: "title",
-          fn: function() {
-            return [_vm._v("Change Visibility")]
-          },
-          proxy: true
-        },
-        {
-          key: "footer",
-          fn: function() {
-            return [
-              _c(
-                "button",
-                {
-                  staticClass:
-                    "ml-auto block px-4 py-1 rounded text-sm m-0 border-2 font-semibold text-blue-700 border-blue-700 focus:outline-none hover:bg-blue-700 hover:text-white",
-                  on: {
-                    click: function($event) {
-                      return _vm.save()
-                    }
-                  }
-                },
-                [_vm._v("\n            Save\n        ")]
-              )
-            ]
-          },
-          proxy: true
-        }
-      ])
-    },
-    [
-      _vm._v(" "),
-      _c("div", { staticClass: "my-3" }, [
-        _c("div", { staticClass: "w-full px-3 mb-6 md:mb-0" }, [
-          _c(
-            "label",
-            {
-              staticClass:
-                "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
-              attrs: { for: "grid-state" }
-            },
-            [_vm._v("\n                Visibility:\n            ")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "relative" }, [
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.visibility,
-                    expression: "visibility"
-                  }
-                ],
-                staticClass:
-                  "block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
-                attrs: { id: "grid-state" },
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.visibility = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
-                  }
-                }
-              },
-              [
-                _c("option", { attrs: { value: "public" } }, [
-                  _vm._v("Public")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "private" } }, [
-                  _vm._v("Private")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-              },
-              [_c("fm-svg", { attrs: { name: "arrow_down" } })],
-              1
-            )
-          ])
-        ])
-      ])
-    ]
   )
 }
 var staticRenderFns = []
@@ -38165,7 +37928,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$prettyBytes = __webpack_re
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$pluralize = __webpack_require__(/*! pluralize */ "./packages/Socieboy/FileManager/node_modules/pluralize/pluralize.js"); // Components
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('fm-breadcrumb', __webpack_require__(/*! ./components/Breadcrumb */ "./packages/Socieboy/FileManager/resources/js/components/Breadcrumb.vue")["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('fm-visibility', __webpack_require__(/*! ./components/Visibility */ "./packages/Socieboy/FileManager/resources/js/components/Visibility.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('fm-dropzone', __webpack_require__(/*! ./components/Dropzone */ "./packages/Socieboy/FileManager/resources/js/components/Dropzone.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('fm-dropdown', __webpack_require__(/*! ./components/Dropdown */ "./packages/Socieboy/FileManager/resources/js/components/Dropdown.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('fm-folders', __webpack_require__(/*! ./components/Folders */ "./packages/Socieboy/FileManager/resources/js/components/Folders.vue")["default"]);
@@ -38209,6 +37971,7 @@ window.app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
         bus.$emit('directory', _this2.viewDirectory);
       })["catch"](function (_ref) {
         var response = _ref.response;
+        console.log(response.data.errors);
         alert(response.data.errors.error[0]);
       });
     },
@@ -38803,83 +38566,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./packages/Socieboy/FileManager/resources/js/components/Visibility.vue":
-/*!******************************************************************************!*\
-  !*** ./packages/Socieboy/FileManager/resources/js/components/Visibility.vue ***!
-  \******************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Visibility_vue_vue_type_template_id_0f51691f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Visibility.vue?vue&type=template&id=0f51691f& */ "./packages/Socieboy/FileManager/resources/js/components/Visibility.vue?vue&type=template&id=0f51691f&");
-/* harmony import */ var _Visibility_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Visibility.vue?vue&type=script&lang=js& */ "./packages/Socieboy/FileManager/resources/js/components/Visibility.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Visibility_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Visibility_vue_vue_type_template_id_0f51691f___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Visibility_vue_vue_type_template_id_0f51691f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "packages/Socieboy/FileManager/resources/js/components/Visibility.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./packages/Socieboy/FileManager/resources/js/components/Visibility.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************************************!*\
-  !*** ./packages/Socieboy/FileManager/resources/js/components/Visibility.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Visibility_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Visibility.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./packages/Socieboy/FileManager/resources/js/components/Visibility.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Visibility_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./packages/Socieboy/FileManager/resources/js/components/Visibility.vue?vue&type=template&id=0f51691f&":
-/*!*************************************************************************************************************!*\
-  !*** ./packages/Socieboy/FileManager/resources/js/components/Visibility.vue?vue&type=template&id=0f51691f& ***!
-  \*************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Visibility_vue_vue_type_template_id_0f51691f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Visibility.vue?vue&type=template&id=0f51691f& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./packages/Socieboy/FileManager/resources/js/components/Visibility.vue?vue&type=template&id=0f51691f&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Visibility_vue_vue_type_template_id_0f51691f___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Visibility_vue_vue_type_template_id_0f51691f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
 /***/ "./packages/Socieboy/FileManager/resources/js/icons.json":
 /*!***************************************************************!*\
   !*** ./packages/Socieboy/FileManager/resources/js/icons.json ***!
   \***************************************************************/
-/*! exports provided: folder, file, close, arrow_down, default */
+/*! exports provided: folder, file, close, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"folder\":\"M18.208,2.958H8.875V1.792c0-0.644-0.522-1.167-1.167-1.167H1.875c-0.644,0-1.167,0.522-1.167,1.167v16.333 c0,0.645,0.522,1.166,1.167,1.166h16.333c0.645,0,1.167-0.521,1.167-1.166v-14C19.375,3.48,18.853,2.958,18.208,2.958z M18.208,17.542c0,0.322-0.261,0.583-0.583,0.583H2.458c-0.323,0-0.583-0.261-0.583-0.583V6.458h16.333V17.542z M17.625,5.292 H1.875V2.375c0-0.323,0.261-0.583,0.583-0.583h4.667c0.323,0,0.583,0.261,0.583,0.583v1.75h9.917c0.322,0,0.583,0.261,0.583,0.583 C18.208,5.031,17.947,5.292,17.625,5.292z\",\"file\":\"M17.206,5.45l0.271-0.27l-4.275-4.274l-0.27,0.269V0.9H3.263c-0.314,0-0.569,0.255-0.569,0.569v17.062 c0,0.314,0.255,0.568,0.569,0.568h13.649c0.313,0,0.569-0.254,0.569-0.568V5.45H17.206z M12.932,2.302L16.08,5.45h-3.148V2.302z M16.344,17.394c0,0.314-0.254,0.569-0.568,0.569H4.4c-0.314,0-0.568-0.255-0.568-0.569V2.606c0-0.314,0.254-0.568,0.568-0.568 h7.394v4.55h4.55V17.394z\",\"close\":\"M11.469,10l7.08-7.08c0.406-0.406,0.406-1.064,0-1.469c-0.406-0.406-1.063-0.406-1.469,0L10,8.53l-7.081-7.08\\n\\t\\t\\t\\t\\t\\t\\tc-0.406-0.406-1.064-0.406-1.469,0c-0.406,0.406-0.406,1.063,0,1.469L8.531,10L1.45,17.081c-0.406,0.406-0.406,1.064,0,1.469\\n\\t\\t\\t\\t\\t\\t\\tc0.203,0.203,0.469,0.304,0.735,0.304c0.266,0,0.531-0.101,0.735-0.304L10,11.469l7.08,7.081c0.203,0.203,0.469,0.304,0.735,0.304\\n\\t\\t\\t\\t\\t\\t\\tc0.267,0,0.532-0.101,0.735-0.304c0.406-0.406,0.406-1.064,0-1.469L11.469,10z\",\"arrow_down\":\"M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z\"}");
+module.exports = JSON.parse("{\"folder\":\"M18.208,2.958H8.875V1.792c0-0.644-0.522-1.167-1.167-1.167H1.875c-0.644,0-1.167,0.522-1.167,1.167v16.333 c0,0.645,0.522,1.166,1.167,1.166h16.333c0.645,0,1.167-0.521,1.167-1.166v-14C19.375,3.48,18.853,2.958,18.208,2.958z M18.208,17.542c0,0.322-0.261,0.583-0.583,0.583H2.458c-0.323,0-0.583-0.261-0.583-0.583V6.458h16.333V17.542z M17.625,5.292 H1.875V2.375c0-0.323,0.261-0.583,0.583-0.583h4.667c0.323,0,0.583,0.261,0.583,0.583v1.75h9.917c0.322,0,0.583,0.261,0.583,0.583 C18.208,5.031,17.947,5.292,17.625,5.292z\",\"file\":\"M17.206,5.45l0.271-0.27l-4.275-4.274l-0.27,0.269V0.9H3.263c-0.314,0-0.569,0.255-0.569,0.569v17.062 c0,0.314,0.255,0.568,0.569,0.568h13.649c0.313,0,0.569-0.254,0.569-0.568V5.45H17.206z M12.932,2.302L16.08,5.45h-3.148V2.302z M16.344,17.394c0,0.314-0.254,0.569-0.568,0.569H4.4c-0.314,0-0.568-0.255-0.568-0.569V2.606c0-0.314,0.254-0.568,0.568-0.568 h7.394v4.55h4.55V17.394z\",\"close\":\"M11.469,10l7.08-7.08c0.406-0.406,0.406-1.064,0-1.469c-0.406-0.406-1.063-0.406-1.469,0L10,8.53l-7.081-7.08\\n\\t\\t\\t\\t\\t\\t\\tc-0.406-0.406-1.064-0.406-1.469,0c-0.406,0.406-0.406,1.063,0,1.469L8.531,10L1.45,17.081c-0.406,0.406-0.406,1.064,0,1.469\\n\\t\\t\\t\\t\\t\\t\\tc0.203,0.203,0.469,0.304,0.735,0.304c0.266,0,0.531-0.101,0.735-0.304L10,11.469l7.08,7.081c0.203,0.203,0.469,0.304,0.735,0.304\\n\\t\\t\\t\\t\\t\\t\\tc0.267,0,0.532-0.101,0.735-0.304c0.406-0.406,0.406-1.064,0-1.469L11.469,10z\"}");
 
 /***/ }),
 
@@ -38890,8 +38584,8 @@ module.exports = JSON.parse("{\"folder\":\"M18.208,2.958H8.875V1.792c0-0.644-0.5
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/socieboy/Sites/socieboy/packages/Socieboy/FileManager/resources/js/app.js */"./packages/Socieboy/FileManager/resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/socieboy/Sites/socieboy/packages/Socieboy/FileManager/resources/css/app.css */"./packages/Socieboy/FileManager/resources/css/app.css");
+__webpack_require__(/*! /Users/socieboy/Sites/filemanagerapp/packages/Socieboy/FileManager/resources/js/app.js */"./packages/Socieboy/FileManager/resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/socieboy/Sites/filemanagerapp/packages/Socieboy/FileManager/resources/css/app.css */"./packages/Socieboy/FileManager/resources/css/app.css");
 
 
 /***/ })

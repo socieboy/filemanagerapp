@@ -12,6 +12,7 @@ const mix = require('laravel-mix');
  */
 
 mix.setPublicPath('public/vendor/filemanager');
+
 mix.js('packages/Socieboy/FileManager/resources/js/app.js', 'app.js').version();
 mix.postCss('packages/Socieboy/FileManager/resources/css/app.css', 'app.css', [
     require('tailwindcss'),
